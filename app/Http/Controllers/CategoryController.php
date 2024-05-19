@@ -20,13 +20,21 @@ class CategoryController extends Controller
             $validator = $request->validate([
                 'name'      => 'required',
                 'slug'      => 'required|unique:categories',
-                'parent_id' => 'nullable|numeric'
+                'parent_id' => 'nullable|numeric',
+                'link'      => 'required',
+                'image'     => 'required',
             ]);
-
+           
+            $categori       = $request->file('image');
+            $extention      = $categori  ->getClientOriginalName();
+            $imageName      = 'categori_'.time().'.'.$extention;
+            $categori ->storeAs('public/Category',$imageName);
             Category::create([
                 'name' => $request->name,
                 'slug' => $request->slug,
-                'parent_id' =>$request->parent_id
+                'parent_id' =>$request->parent_id,
+                'image'=>$imageName,
+                'link' =>$request->link,
             ]);
 
             return redirect()->back()->with('success', 'Category has been created successfully.');

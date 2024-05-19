@@ -26,6 +26,14 @@
 </head>
 
 <body>
+
+
+   
+    @if(session('success'))
+        <div class="alert alert-success">
+          {{ session('success') }}
+        </div> 
+    @endif
     <!-- Topbar Start -->
     <div class="container-fluid">
         <div class="row bg-secondary py-2 px-xl-5">
@@ -81,9 +89,9 @@
                     <i class="fas fa-heart text-primary"></i>
                     <span class="badge">0</span>
                 </a>
-                <a href="" class="btn border">
+                <a href="{{ route('shopping.cart') }}" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
-                    <span class="badge">0</span>
+                    <span class="badge">{{ count((array)session('cart'))}}</span>
                 </a>
             </div>
         </div>
@@ -214,8 +222,82 @@
         </div>
     </div>
     <!-- Featured End -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5 pb-3">
+            @foreach ($categories as $category  )
+            <div class="col-lg-4 col-md-6 pb-1">
+                <div class="cat-item d-flex flex-column border mb-4" h-50 style="padding: 30px;">
+                    @php
+                        $totalQuantity = 0;
+                    @endphp
+                    
+                    @foreach($category->products as $product)
+                        @php
+                            $totalQuantity += $product->quantity;
+                        @endphp
+                    @endforeach
+                    
+                    <p class="text-right">{{ $totalQuantity }} Products</p>
+                    
+                    <a href="" class="cat-img position-relative overflow-hidden mb-3">
+                        <img class="img-fluid" src="{{ asset('storage/Category/' . $category->image) }}" alt="">
+                    </a>
+                    
+                    <h5 class="font-weight-semi-bold m-0">{{ $category->name }}</h5>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+    <!-- Categories End --> 
 
-     
+    <div class="container-fluid offer pt-5">
+        <div class="row px-xl-5">
+            @foreach ($offer_banner as $banner)
+            <div class="col-md-6 pb-4">
+                <div class="position-relative bg-secondary text-center text-md-right text-white mb-2 py-5 px-5">
+                    <img  src="{{asset('storage/Offer_banner/' .$banner->offer_image)}}" alt="">
+                    <div class="position-relative" style="z-index: 1;">
+                        <h5 class="text-uppercase text-primary mb-3">{{$banner->offer_info   }}</h5>
+                        <h1 class="mb-4 font-weight-semi-bold ">{{ $banner->offer_banner_title}}</h1>
+                        <a href="" class="btn btn-outline-primary py-md-2 px-md-3">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+    <!-- Offer End -->
+
+    <!-- Products Start -->
+    <div class="container-fluid pt-5">
+        <div class="text-center mb-4">
+            <h2 class="section-title px-5"><span class="px-2">Trandy Products</span></h2>
+        </div>
+        <div class="row px-xl-5 pb-3">
+            @foreach ($products as $product )
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                <div class="card product-item border-0 mb-4">
+                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                        <img class="img-fluid w-100" src="{{ asset('storage/product/' . $product->image) }}" alt="">
+                    </div>
+                    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                        <h6 class="text-truncate mb-3">{{$product->name  }}</h6>
+                        <div class="d-flex justify-content-center">
+                            <h6>{{ $product->price }} tk</h6><h6 class="text-muted ml-2"><del> 1200 tk</del></h6>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between bg-light border">
+                        <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
+                        <a href="{{ route('addproduct.to.cart',$product->id) }}" class="btn btn-sm text-dark p-0"><i class=""></i>Add To Cart</a>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+            
+        </div>
+    </div>
+    <!-- Products End -->
 
     <!-- Footer Start -->
     <div class="container-fluid bg-secondary text-dark mt-5 pt-5">

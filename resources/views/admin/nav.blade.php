@@ -119,10 +119,31 @@
                             <span>Banners Module</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="{{ route('banner_add') }}">Banner add</a></li>
-                            <li><a href="{{ route('banner_show') }}">Banner Show</a></li>
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                    <i class="bx bx-layout"></i>
+                                    <span>Banners</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li><a href="{{ route('banner_add') }}">Banner add</a></li>
+                                    <li><a href="{{ route('banner_show') }}">Banner Show</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                    <i class="bx bx-layout"></i>
+                                    <span>Offers Banners</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li><a href="{{ route('offer_banner_add') }}">Offers Banner add</a></li>
+                                    <li><a href="{{ route('offer_banner_show') }}">Offers Banner Show</a></li>
+                                </ul>
+                            </li>
+                            
                         </ul>
                     </li>
+
+                    
 
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -135,7 +156,16 @@
                         </ul>
                     </li>
 
-                  
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="bx bx-layout"></i>
+                            <span>Product Module</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{ route('product') }}">Banner add</a></li>
+                            <li><a href="{{ route('product_show') }}">Banner Show</a></li>
+                        </ul>
+                    </li>
 
                 </ul>
             </div>

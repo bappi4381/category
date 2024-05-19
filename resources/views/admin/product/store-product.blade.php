@@ -6,40 +6,60 @@
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Create Category</h3>
+                    <h3 class="box-title">Create Product</h3>
                 </div>
                 
-                <form role="form" action="{{route('createCategory')}}" method="POST" enctype="multipart/form-data">
+                <form role="form" action="{{route('product_create')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="box-body">
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Category name*</label>
-                                    <input type="text" name="name" class="form-control" placeholder="Category name" value="{{old('name')}}" required />
+                                    <label>Product title</label>
+                                    <input type="text" name="name" class="form-control" placeholder="Product title" value="{{old('name')}}" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Product Sku</label>
+                                    <input type="text" name="sku" class="form-control" placeholder="Product Sku" value="{{old('name')}}" required />
                                 </div>
                             </div>
 
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Category Slug*</label>
-                                    <input type="text" name="slug" class="form-control" placeholder="Category name" value="{{old('slug')}}" required />
+                                    <label for="description">Description</label>
+                                    <textarea class="form-control" name="description" rows="4"></textarea>
                                 </div>
                             </div>
 
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Category Link*</label>
-                                    <input type="text" name="link" class="form-control" placeholder="Category link page" value="{{old('slug')}}" required />
+                                    <label>Product Quntity</label>
+                                    <input type="number" name="quantity" class="form-control" placeholder="Product Quntity" value="" required />
+                                </div>
+                                <div class="form-group">
+                                    <label>Product Price</label>
+                                    <input type="number" name="price" class="form-control" placeholder="Product Price" value="" required />
                                 </div>
                             </div>
-
-                            
-
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Select parent category*</label>
-                                    <select type="text" name="parent_id" class="form-control">
+                                    <label>Select Main Category </label>
+                                    <select type="text" name="category_id" class="form-control">
+                                        <option value="">None</option>
+                                        @if($categories)
+                                            @foreach($categories as $category)
+                                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Select categories</label>
+                                    <select type="text" name="allcategory_id" class="form-control">
                                         <option value="">None</option>
                                         @if($categories)
                                             @foreach($categories as $category)
@@ -56,7 +76,7 @@
 
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Category Image*</label>
+                                    <label> Product Image</label>
                                     <input type="file" name="image" class="form-control" placeholder="Image" value="{{old('image')}}" required />
                                 </div>
                             </div>
@@ -64,7 +84,7 @@
                         </div>
                     </div>
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary">Add Product</button>
 
                     </div>
                 </form>

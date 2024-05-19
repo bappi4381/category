@@ -10,6 +10,8 @@ class BannerController extends Controller
     public function banner_add(){
         return view('admin.banner.banner-create');
     }
+    
+
     public function banner_create(Request $request){
         $banner        = $request->file('image');
         $extention      = $banner ->getClientOriginalName();
@@ -48,15 +50,19 @@ class BannerController extends Controller
             $banners        = $request->file('image');
             $extention      = $banners  ->getClientOriginalName();
             $imageName      = 'banner_'.time().'.'.$extention;
-            $banners ->storeAs('public/Banner',$imageName);
-            
+            $directory= 'public/Banner/';
+            $banners ->storeAs($directory,$imageName);
+        }
+            else{
+                $imageName  = $banner ->image;
+            }
         
             $banner ->banner_title       = $request->banner_title;
             $banner ->discount_info       = $request->discount_info;
             $banner->image             = $imageName;
             $banner->save();
           
-        }
+        
         return redirect()->route('banner_show');
         
     }
